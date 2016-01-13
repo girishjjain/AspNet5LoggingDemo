@@ -1,0 +1,1 @@
+This sample project shows how to use tracing framework with new ASP.NET 5 projects. Tracing framework, using TraceSource and TraceListener, has been available in .NET since its inception. This project gives you an example of how to leverage that capability with logging framework of ASP.NET 5. It also shows you how to filter log entries for a specific trace source.
