@@ -45,6 +45,10 @@ namespace AspNet5Logging
                 listener
             );
 
+            // This would prevent TextWriterTraceListener from buffering trace messages but cause
+            // it to flush them as each trace message is sent to listener
+            Trace.AutoFlush = true;
+
             app.UseIISPlatformHandler();
 
             app.UseStaticFiles();
