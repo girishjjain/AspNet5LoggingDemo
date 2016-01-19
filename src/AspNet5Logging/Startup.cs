@@ -37,6 +37,13 @@ namespace AspNet5Logging
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            // This would prevent TextWriterTraceListener from buffering trace messages but cause
+            // it to flush them as each trace message is sent to listener
+            if (env.IsDevelopment())
+            {
+                Trace.AutoFlush = true;
+            }
+
             var listener = new TextWriterTraceListener("AspNet5LoggingService.txt");
             listener.Filter = new SourceFilter("AspNet5LoggingService");
 
@@ -44,10 +51,6 @@ namespace AspNet5Logging
                 new SourceSwitch("AspNet5LoggingSwitch", "Verbose"),
                 listener
             );
-
-            // This would prevent TextWriterTraceListener from buffering trace messages but cause
-            // it to flush them as each trace message is sent to listener
-            Trace.AutoFlush = true;
 
             app.UseIISPlatformHandler();
 
